@@ -4,6 +4,7 @@ import STORE from './STORE';
 import './App.css';
 import Header from "./Components/Header";
 import Sidebar from "./Components/Sidebar";
+import NoteList from "./Components/NoteList";
 import RouteTestFolder from "./Components/RouteTestFolder";
 
 class App extends React.Component {
@@ -30,8 +31,17 @@ class App extends React.Component {
         this.setState({activeFolder: null});
     };
 
-    createRoutesMain = () => {
-
+    filterNotes = (activeFolder) => {
+        const filteredNotes = this.state.notes.filter(note => note.folderId === activeFolder);
+        console.log('filteredNotes', filteredNotes);
+        return filteredNotes.map(fNote => {
+            return(
+                    <NoteList
+                        {...fNote}
+                    />
+                );
+            }
+        );
     };
 
     render() {
@@ -60,13 +70,29 @@ class App extends React.Component {
                         <Header
                             clearSelectedFolder={this.clearSelectedFolder}
                         />
-                        <RouteTestFolder />
                         <Sidebar
                             {...routeProps}
                             folders={this.state.folders}
                             selectFolder={(e) => this.selectFolder(e)}
                             activeFolder={this.state.activeFolder}
                         />
+                        {this.filterNotes(this.state.activeFolder)}
+                    </>}
+                />
+                <Route
+                    exact
+                    path={"/note/:noteId"}
+                    render={(routeProps) => <>
+                       <Header
+                        clearSelectedFolder={this.clearSelectedFolder}
+                       />
+                       <Sidebar
+                           {...routeProps}
+                           folders={this.state.folders}
+                           selectFolder={(e)=>this.selectFolder(e)}
+                           activeFolder={this.state.activeFolder}
+                       />
+
                     </>}
                 />
             </>
