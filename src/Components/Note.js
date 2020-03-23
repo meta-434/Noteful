@@ -1,14 +1,9 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React from "react";
 
-export default class NoteList extends React.Component {
+export default class Note extends React.Component{
     render() {
         return (
-            <Link
-                to={`/note/${this.props.id}`}
-                className="note"
-                id={this.props.id}
-            >
+            <div>
                 <div>
                     <h3>
                         {this.props.name}
@@ -17,7 +12,8 @@ export default class NoteList extends React.Component {
                         {`Modified ${this.props.modified}`}
                     </p>
                 </div>
-            </Link>
+                <p>{this.props.content}</p>
+            </div>
         );
     }
 }

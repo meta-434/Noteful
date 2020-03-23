@@ -1,17 +1,28 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import Folder from './Folder';
 
 export default class Sidebar extends React.Component {
     render() {
-        return this.props.folders.map(folder => {
+        if (this.props.goBack) {
             return (
-               <Folder
-                   selectFolder={(e) => this.props.selectFolder(e)}
-                   name={folder.name}
-                   id={folder.id}
-                   isSelected={folder.id === this.props.activeFolder}
-               />
-            );
-        });
+                <Link to={`/folder/${this.props.activeFolder}`}>
+                    Go Back
+                </Link>
+            )
+        } else {
+            return this.props.folders.map(folder => {
+                return (
+                    <Folder
+                        selectFolder={(e) => this.props.selectFolder(e)}
+                        name={folder.name}
+                        key={folder.id}
+                        id={folder.id}
+                        isSelected={folder.id === this.props.activeFolder}
+                    />
+                );
+
+            });
+        }
     }
 }

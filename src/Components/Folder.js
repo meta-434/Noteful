@@ -8,7 +8,7 @@ export default class Folder extends React.Component {
             <Link
                 to={`/folder/${this.props.id}`}
                 type="button"
-                class={(this.props.isSelected) ? ("selected") : ("unselected")}
+                className={(this.props.isSelected) ? ("selected") : ("unselected")}
                 id={this.props.id}
                 onClick={this.props.selectFolder}>
                 {this.props.name}
