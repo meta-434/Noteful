@@ -1,16 +1,13 @@
 import React from "react";
-import { useHistory } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
-export default function Header({clearSelectedFolder}) {
-
-    const history = useHistory();
-
-    const handleClick = () => {
-        clearSelectedFolder();
-        history.push("/");
-    };
+export default function Header() {
 
     return(
-            <h1 onClick={handleClick}>Noteful</h1>
+            <h1>
+                <Link to={"/"}>
+                    Noteful
+                </Link>
+            </h1>
         );
 }
