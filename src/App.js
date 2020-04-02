@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import STORE from './STORE';
+import axios from 'axios';
 import './App.css';
 import ComponentComposer from './Components/ComponentComposer'
 import NotefulContext from "./NotefulContext";
@@ -14,7 +14,17 @@ class App extends React.Component {
     };
 
     componentDidMount = () => {
-        this.setState({notes: STORE.notes, folders: STORE.folders});
+        axios.get('http://localhost:9090/folders')
+            .then(res => res.data)
+            .then(resData => {
+               this.setState({folders: resData})
+            });
+
+        axios.get('http://localhost:9090/notes')
+            .then(res => res.data)
+            .then(resData => {
+                this.setState({notes: resData})
+            });
     };
 
     selectFolder = (e) => {
