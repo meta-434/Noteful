@@ -8,8 +8,8 @@ export default class Sidebar extends React.Component {
     static contextType = NotefulContext;
 
     render() {
-        const { goBack, activeFolder, selectFolder, folders } = this.context;
-        if (goBack) {
+        const { activeFolder, selectFolder, folders } = this.context;
+        if (this.props.noteId) {
             return (
                 <Link
                     to={`/folder/${activeFolder}`}

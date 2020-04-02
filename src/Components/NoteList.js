@@ -8,9 +8,9 @@ export default class NoteList extends React.Component {
 
     render() {
         const folderId = this.props.folderId;
-        const { notes } = this.context;
+        const { notes } = this.context || 'HELP';
         const filteredNotes = (folderId) ? notes.filter(note => note.folderId === folderId) : notes;
-        console.log('filteredNotes', this.props);
+        console.log('filteredNotes', filteredNotes, 'folderId', folderId, 'notes', notes);
 
         return filteredNotes.map(fNote => {
             return (

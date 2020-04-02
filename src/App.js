@@ -23,7 +23,7 @@ class App extends React.Component {
     };
 
     updateRoute = (route) => {
-        this.setState({route})
+        this.setState({route});
         console.log(this.state.route);
     };
 

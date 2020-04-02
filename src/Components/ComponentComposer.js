@@ -12,6 +12,7 @@ export default class ComponentComposer extends React.Component {
         const noteRoute = (Object.keys(this.props.match.params)[0] === 'noteId');
 
         if (!noteRoute) {
+            // route for folder view
             return(
                 <>
                     <Header />
@@ -21,7 +22,7 @@ export default class ComponentComposer extends React.Component {
                 </>
             )
         } else {
-            console.log('composer props', this.props);
+            // route for note view.
             return(
                 <>
                     <Header />
