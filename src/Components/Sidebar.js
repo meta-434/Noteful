@@ -2,28 +2,31 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import Folder from './Folder';
 import './Sidebar.css';
+import NotefulContext from "../NotefulContext";
 
 export default class Sidebar extends React.Component {
+    static contextType = NotefulContext;
+
     render() {
-        //define noteId and check for existence
-        if (this.props.goBack) {
+        const { goBack, activeFolder, selectFolder, folders } = this.context;
+        if (goBack) {
             return (
                 <Link
-                    to={`/folder/${this.props.activeFolder}`}
+                    to={`/folder/${activeFolder}`}
                     className={"sidebar"}
                 >
                     Go Back
                 </Link>
             )
         } else {
-            return this.props.folders.map(folder => {
+            return folders.map(folder => {
                 return (
                     <Folder
-                        selectFolder={(e) => this.props.selectFolder(e)}
+                        selectFolder={(e) => selectFolder(e)}
                         name={folder.name}
                         key={folder.id}
                         id={folder.id}
-                        isSelected={folder.id === this.props.path}
+                        isSelected={folder.id === activeFolder}
                     />
                 );
 

@@ -3,34 +3,32 @@ import Header from "./Header";
 import Sidebar from "./Sidebar";
 import NotefulContext from "../NotefulContext";
 import NoteList from "./NoteList";
-import Note from "./Note";
+import Note from "./Note"
 
 export default class ComponentComposer extends React.Component {
     static contextType = NotefulContext;
 
     render() {
-        const { selectFolder, folders, notes} = this.context;
-        const folderId = this.props.match.params.folderId;
+        const noteRoute = (Object.keys(this.props.match.params)[0] === 'noteId');
 
+        if (!noteRoute) {
+            return(
+                <>
+                    <Header />
+                    <Sidebar {...this.props.match.params}/>
+                    <NoteList {...this.props.match.params}/>
 
-        function getNotes () {
-            const filteredNotes = (folderId) ? notes.filter(note => note.folderId === folderId) : notes;
-            return filteredNotes.map(note => <NoteList note={note}/>);
+                </>
+            )
+        } else {
+            console.log('composer props', this.props);
+            return(
+                <>
+                    <Header />
+                    <Sidebar {...this.props.match.params}/>
+                    <Note {...this.props.match.params}/>
+                </>
+            )
         }
-
-
-
-        return(
-            <>
-                <Header />
-                <Sidebar
-                    folders={folders}
-                    selectFolder={(e) => selectFolder(e)}
-                    activeFolder={folderId}
-                    goBack={false}
-                />
-                <NoteList />
-            </>
-        )
     }
 }

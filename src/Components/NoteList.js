@@ -7,23 +7,28 @@ export default class NoteList extends React.Component {
     static contextType = NotefulContext;
 
     render() {
-       console.log('notelistprops::', this.props);
+        const folderId = this.props.folderId;
+        const { notes } = this.context;
+        const filteredNotes = (folderId) ? notes.filter(note => note.folderId === folderId) : notes;
+        console.log('filteredNotes', this.props);
 
-        return (
-            <Link
-                to={`/note/${this.props.id}`}
-                className="notelist"
-                id={this.props.id}
-            >
-                <div>
-                    <h3>
-                        {this.props.name}
-                    </h3>
-                    <p>
-                        {`Modified ${this.props.modified}`}
-                    </p>
-                </div>
-            </Link>
-        );
+        return filteredNotes.map(fNote => {
+            return (
+                <Link
+                    to={`/note/${fNote.id}`}
+                    className="notelist"
+                    id={fNote.id}
+                >
+                    <div>
+                        <h3>
+                            {fNote.name}
+                        </h3>
+                        <p>
+                            {`Modified ${fNote.modified}`}
+                        </p>
+                    </div>
+                </Link>
+            );
+        });
     }
 }
