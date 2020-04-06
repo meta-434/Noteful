@@ -1,74 +1,118 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import axios from 'axios';
 import './App.css';
-import ComponentComposer from './Components/ComponentComposer'
+import Header from './Components/Header';
+import Nav from "./Components/Nav";
+import Main from "./Components/Main";
+import Folder from "./Components/Folder";
+import AddFolder from "./Components/AddFolder";
+import AddNote from "./Components/AddNote";
+import NoteList from "./Components/NoteList";
+import ErrorBoundary from "./ErrorBoundary";
 import NotefulContext from "./NotefulContext";
 
-class App extends React.Component {
+class App extends Component {
     state = {
-        notes: [],
         folders: [],
-        activeFolder: window.location.pathname.toString().slice(-36),
-        route: undefined,
+        notes: []
     };
 
-    componentDidMount = () => {
-        axios.get('http://localhost:9090/folders')
-            .then(res => res.data)
-            .then(resData => {
-               this.setState({folders: resData})
-            });
+    componentDidMount() {
+        fetch('http://localhost:9090/folders')
+            .then(response => response.json())
+            .then(responseJson =>
+                this.setState({
+                    folders: responseJson
+                })
+            );
 
-        axios.get('http://localhost:9090/notes')
-            .then(res => res.data)
-            .then(resData => {
-                this.setState({notes: resData})
-            });
+        fetch('http://localhost:9090/notes')
+            .then(response => response.json())
+            .then(responseJson =>
+                this.setState({
+                    notes: responseJson
+                })
+            )
+            .then(() => console.log(this.state));
+
     };
 
-    selectFolder = (e) => {
-        this.setState({activeFolder: e.target.id});
-        return this.state.activeFolder;
+    handleDeleteFetch = (noteId) => {
+        fetch(`http://localhost:9090/notes/${noteId}`, {
+            method: 'DELETE'
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error(response.statusText);
+                }
+            })
+            .then(() => this.handleDelete(noteId))
+            .catch(error => console.log(error))
     };
 
-    updateRoute = (route) => {
-        this.setState({route});
-        console.log(this.state.route);
-    };
+    handleDelete(id) {
+        this.setState({
+            notes: this.state.notes.filter(note => note.id !== id)
+        });
+    }
+
+    handlePostFolder(folderName) {
+        fetch('http://localhost:9090/folders', {
+            method: 'POST',
+            body: JSON.stringify({
+                name: folderName
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+    }
+
+    handlePostNote({ name, folderId, content }) {
+        fetch(`http://localhost:9090/notes`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                modified: new Date(),
+                name,
+                folderId,
+                content
+            })
+        })
+    }
 
     render() {
-        const { notes, folders, activeFolder, route } = this.state;
+        const context = {
+            folders: this.state.folders,
+            notes: this.state.notes,
+            handleDeleteFetch: this.handleDeleteFetch,
+            handleDelete: this.handleDelete,
+            handlePostFolder: this.handlePostFolder,
+            handlePostNote: this.handlePostNote
+        };
+
         return (
-        <NotefulContext.Provider
-            value={{
-                notes,
-                folders,
-                route,
-                updateRoute: this.updateRoute,
-                selectFolder: this.selectFolder,
-                activeFolder,
-            }}
-        >
-            <>
-                <Route
-                    exact
-                    path={"/"}
-                    component={ComponentComposer}
-                />
-                <Route
-                    exact
-                    path={"/folder/:folderId"}
-                    component={ComponentComposer}
-                />
-                <Route
-                    exact
-                    path={"/note/:noteId"}
-                    component={ComponentComposer}
-                />
-            </>
-        </NotefulContext.Provider >
-        );
+            <NotefulContext.Provider value={(context)}>
+                <div className="App">
+                    <Route component={Header} />
+                    <Route component={Nav} />
+                    <main className="app-content">
+                        <ErrorBoundary>
+                            <Route exact path="/" component={Main} />
+                        </ErrorBoundary>
+                        <Route path="/folders/:folder_id" component={Folder} />
+                        <Route exact path="/add-folder" component={AddFolder} />
+                        <Route exact path="/add-note" component={AddNote} />
+                        <Route path="/notes/:note_id" render={routeProps => <NoteList {...routeProps} />} />
+                        <div className="clear"></div>
+                    </main>
+                </div>
+            </NotefulContext.Provider>
+        )
     }
 }
 

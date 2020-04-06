@@ -1,34 +1,29 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
-import './NoteList.css';
-import NotefulContext from "../NotefulContext";
+import React, { Component } from 'react';
+import NotefulContext from '../NotefulContext';
+import DeleteButton from './DeleteButton';
 
-export default class NoteList extends React.Component {
+export default class Main extends Component {
     static contextType = NotefulContext;
 
     render() {
-        const folderId = this.props.folderId;
-        const { notes } = this.context || 'HELP';
-        const filteredNotes = (folderId) ? notes.filter(note => note.folderId === folderId) : notes;
-        console.log('filteredNotes', filteredNotes, 'folderId', folderId, 'notes', notes);
-
-        return filteredNotes.map(fNote => {
-            return (
-                <Link
-                    to={`/note/${fNote.id}`}
-                    className="notelist"
-                    id={fNote.id}
-                >
-                    <div>
-                        <h3>
-                            {fNote.name}
-                        </h3>
-                        <p>
-                            {`Modified ${fNote.modified}`}
-                        </p>
-                    </div>
-                </Link>
-            );
-        });
+        console.log('here', this.props);
+        return (
+            <NotefulContext.Consumer>
+                {({ notes }) => {
+                    const iNote = notes.filter(iNote => iNote.id === this.props.match.params.note_id);
+                    console.log('iNote: ', iNote);
+                    return iNote.map(iNote => {
+                        return(
+                            <div className="iNote" key={iNote.id}>
+                                <h3>{iNote.name}</h3>
+                                <p>{iNote.content}</p>
+                                <p>Modified: {iNote.modified}</p>
+                                <DeleteButton note={iNote} />
+                            </div>
+                        )
+                    });
+                }}
+            </NotefulContext.Consumer>
+        );
     }
 }

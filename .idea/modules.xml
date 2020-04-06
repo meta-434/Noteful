@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/noteful.iml" filepath="$PROJECT_DIR$/.idea/noteful.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../noteful-json-server/.idea/noteful-json-server.iml" filepath="$PROJECT_DIR$/../noteful-json-server/.idea/noteful-json-server.iml" />
     </modules>
   </component>
 </project>

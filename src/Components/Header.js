@@ -1,13 +1,12 @@
-import React from "react";
-import {Link} from 'react-router-dom';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 export default function Header() {
-
     return(
-            <h1>
-                <Link to={"/"}>
-                    Noteful
-                </Link>
-            </h1>
-        );
+        <header>
+            <NavLink to="/">
+                <h1>Noteful</h1>
+            </NavLink>
+        </header>
+    )
 }
