@@ -16,37 +16,36 @@ export default class AddFolder extends Component {
 
     handleFolderName = (e) => {
         let folderInput = e.target.value;
-        this.setState({ folderName: folderInput }, this.validateFolder(folderInput))
+        this.setState({ folderName: folderInput },() => this.validateFolder(folderInput))
     };
 
-    validateFolder(name) {
-        let validationMessages = this.state.validation;
+    validateFolder = (name) => {
+        console.log('before, name', name);
+        let validationMessages;
         let hasError = false;
 
-        const checkFolderNames = this.context.folders.filter(folderName => name === folderName.name);
+        const checkExistingFolders = this.context.folders.filter(folderName => name === folderName.name);
 
-        if (name.length === 0) {
+        if (name && name.length === 0) {
             hasError = true;
             validationMessages = 'Please enter a folder name.';
-        }
-
-        if (checkFolderNames.length !== 0) {
+        } else if (checkExistingFolders.length !== 0) {
             hasError = true;
             validationMessages = 'Oops! Folder name already exists.';
-        }
-
-        else {
+        } else {
             validationMessages = '';
         }
 
+        console.log('here, name', name);
         this.setState({
             nameValid: !hasError,
             validation: validationMessages,
-        }, this.formValid(name));
+        }, () => this.formValid(name));
     };
 
-    formValid(name) {
-        if (this.state.folderNameValid) {
+    formValid = (name) => {
+        console.log('formIsValid name', name);
+        if (this.state.nameValid) {
             this.setState({folderName: name})
         }
     };
@@ -64,17 +63,14 @@ export default class AddFolder extends Component {
                         name="folder-name"
                         className="folder-name"
                         defaultValue="i.e. Foobar"
-                        aria-label="Input for new folder name"
-                        aria-required="true"
-                        aria-describedby="error-box"
-                        onChange={this.handleFolderName} />
+                        onChange={ this.handleFolderName} />
                     <button
                         className="submit-button"
                         type="submit"
                         disabled={!this.state.nameValid}>
                         Submit
                     </button>
-                    <section className="error-box" id="error-box" aria-live="assertive">
+                    <section className="error-box" id="error-box">
                         {this.state.validation}
                     </section>
                 </form>

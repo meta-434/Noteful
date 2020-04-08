@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import DeleteButton from './DeleteButton';
 import NotefulContext from '../NotefulContext';
+import './Folder.css';
 
 export default class Folder extends Component {
     static contextType = NotefulContext;
@@ -18,7 +19,7 @@ export default class Folder extends Component {
                             .map(fNote => {
                                 return (
                                     <section className="notes-display" key={fNote.id}>
-                                        <Link to={`/notes/${fNote.id}`}>
+                                        <Link to={`/notes/${fNote.id}`} style={{textDecoration: 'none'}}>
                                             <h3>{fNote.name}</h3>
                                             <p>{fNote.modified}</p>
                                         </Link>

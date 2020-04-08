@@ -12,29 +12,28 @@ export default class AddNote extends Component {
         contentValid: false,
         nameValidation: '',
         contentValidation: ''
-    }
+    };
 
     handlePostSubmit = () => {
         this.context.handlePostNote(this.state);
-    }
+    };
 
-    handleNotename = (e) => {
+    handleNoteName = (e) => {
         let nameInput = e.target.value;
-
-        this.setState({ name: nameInput }, this.validatename(nameInput))
-    }
+        this.setState({ name: nameInput }, (nameInput) => this.validateName(nameInput))
+    };
 
     handleNoteContent = (e) => {
         let contentInput = e.target.value;
-        this.setState({ content: contentInput }, this.validateContent(contentInput))
-    }
+        this.setState({ content: contentInput }, (contentInput) => this.validateContent(contentInput))
+    };
 
     handleFolderId = (e) => {
         let folderId = e.target.value;
         this.setState({ folderId })
-    }
+    };
 
-    validatename(name) {
+    validateName(name) {
         let validationMessages = this.state.nameValidation;
         let hasError = false;
 
@@ -50,7 +49,7 @@ export default class AddNote extends Component {
         this.setState({
             nameValid: !hasError,
             nameValidation: validationMessages,
-        }, this.nameValid(name));
+        }, (name) =>this.nameValid(name));
     }
 
     validateContent(content) {
@@ -69,7 +68,7 @@ export default class AddNote extends Component {
         this.setState({
             contentValid: !hasError,
             contentValidation: validationMessages,
-        }, this.contentValid(content));
+        }, (content) => this.contentValid(content));
     }
 
     nameValid(name) {
@@ -104,20 +103,12 @@ export default class AddNote extends Component {
                         id="note-name"
                         name="note-name"
                         className="note-name"
-                        aria-label="Input for new note name"
-                        aria-required="true"
-                        aria-describedby="error-box"
-                        onChange={this.handleNotename} />
+                        onChange={this.handleNoteName} />
                     <label htmlFor="note-content">Content: </label>
                     <textarea
-                        rows="10"
-                        cols="90"
                         id="note-content"
                         name="note-content"
                         className="note-content"
-                        aria-label="Input for content of new note"
-                        aria-required="true"
-                        aria-describedby="error-box"
                         onChange={this.handleNoteContent} />
                     <label htmlFor="note-folder">Folder: </label>
                     <select

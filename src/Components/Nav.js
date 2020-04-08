@@ -10,19 +10,21 @@ export default class Nav extends Component {
                     return (
                         <nav className="navigation">
                             <section className="add-content">
-                                <NavLink to={'/add-folder'}>
-                                    <ul><li>Add Folder</li></ul>
+                                <NavLink to={'/add-folder'} style={{textDecoration: 'none'}}>
+                                    <div>Add Folder</div>
                                 </NavLink>
-                                <NavLink to={'/add-note'}>
-                                    <ul><li>Add Note</li></ul>
+                                <NavLink to={'/add-note'} style={{textDecoration: 'none'}}>
+                                    <div>Add Note</div>
                                 </NavLink>
                             </section>
                             <section className="folder-list">
-                                <h3>Your Folders:</h3>
+                                <h3>Folders:</h3>
                                 {folders.map((folder, index) => {
                                     return (
-                                        <NavLink key={index} to={`/folders/${folder.id}`}>
-                                            <ul><li>{folder.name}</li></ul>
+                                        <NavLink to={`/folders/${folder.id}`}
+                                                 key={index}
+                                                 style={{textDecoration: 'none'}}>
+                                            <div>{folder.name}</div>
                                         </NavLink>
                                     )
                                 })}

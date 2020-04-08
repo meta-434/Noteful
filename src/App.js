@@ -52,13 +52,13 @@ class App extends Component {
             .catch(error => console.log(error))
     };
 
-    handleDelete(id) {
+    handleDelete = (id) => {
         this.setState({
             notes: this.state.notes.filter(note => note.id !== id)
         });
-    }
+    };
 
-    handlePostFolder(folderName) {
+    handlePostFolder = (folderName) => {
         fetch('http://localhost:9090/folders', {
             method: 'POST',
             body: JSON.stringify({
@@ -67,10 +67,10 @@ class App extends Component {
             headers: {
                 'Content-Type': 'application/json'
             },
-        })
-    }
+        }).then(r => console.log('folder post confirmation', r))
+    };
 
-    handlePostNote({ name, folderId, content }) {
+    handlePostNote = ({ name, folderId, content }) => {
         fetch(`http://localhost:9090/notes`, {
             method: 'POST',
             headers: {
@@ -82,13 +82,14 @@ class App extends Component {
                 folderId,
                 content
             })
-        })
-    }
+        }).then(r => console.log('note post confirmation: ', r))
+    };
 
     render() {
+        const { folders, notes } = this.state;
         const context = {
-            folders: this.state.folders,
-            notes: this.state.notes,
+            folders,
+            notes,
             handleDeleteFetch: this.handleDeleteFetch,
             handleDelete: this.handleDelete,
             handlePostFolder: this.handlePostFolder,
@@ -108,7 +109,7 @@ class App extends Component {
                         <Route exact path="/add-folder" component={AddFolder} />
                         <Route exact path="/add-note" component={AddNote} />
                         <Route path="/notes/:note_id" render={routeProps => <NoteList {...routeProps} />} />
-                        <div className="clear"></div>
+                        <div className="clear"/>
                     </main>
                 </div>
             </NotefulContext.Provider>

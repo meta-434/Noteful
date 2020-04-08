@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import NotefulContext from '../NotefulContext';
+import './DeleteButton.css';
 
 export default class DeleteButton extends Component {
     static contextType = NotefulContext;

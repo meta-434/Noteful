@@ -1,0 +1,6 @@
+.notes-display {
+    background-color: green;
+    display: inline-flex;
+    flex-basis: fit-content;
+    margin: 0.5%;
+}
