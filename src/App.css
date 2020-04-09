@@ -31,7 +31,8 @@
 }
 
 .iNote {
-  margin-right: auto;
+  justify-content: center;
+  max-width: calc(100% - 200px);
 }
 
 body {

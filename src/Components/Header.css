@@ -5,3 +5,9 @@ h1 {
 .header-link {
     text-decoration: none;
 }
+
+header {
+    max-width: calc(100% - 200px);
+    margin-right: 0;
+    margin-left: auto;
+}
