@@ -60,7 +60,7 @@ export default class AddFolder extends Component {
                         id="folder-name"
                         name="folder-name"
                         className="folder-name"
-                        defaultValue="i.e. Foobar"
+                        defaultValue="Folder Name"
                         onChange={ this.handleFolderName} />
                     <button
                         className="submit-button"
