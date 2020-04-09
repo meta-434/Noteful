@@ -29,3 +29,12 @@
 body {
   background-color: #E2D9FF;
 }
+
+a {
+  color: #BAA3FF;
+  font-weight: bolder;
+}
+
+a:visited {
+  color: #554B73;
+}

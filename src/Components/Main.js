@@ -14,7 +14,7 @@ export default class Main extends Component {
                     return notes.map((note, index) => {
                         return (
                             <section className="notes-display" key={index}>
-                                <Link to={`/notes/${note.id}`} style={{textDecoration: 'none'}}>
+                                <Link to={`/notes/${note.id}`}>
                                     <h3>{note.name}</h3>
                                     <p>{note.modified}</p>
                                 </Link>

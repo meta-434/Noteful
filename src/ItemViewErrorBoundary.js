@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-export default class ErrorBoundary extends Component {
+export default class ItemViewErrorBoundary extends Component {
     state = {
         error: null,
         errorInfo: null,
@@ -18,7 +18,7 @@ export default class ErrorBoundary extends Component {
         if (this.state.errorInfo) {
             return(
                 <div>
-                    <h2>Something went wrong...</h2>
+                    <h2>Something went wrong with folder / note view...</h2>
                     <details style={{whitespace: "pre-wrap"}}>
                         {this.state.error && this.state.error.toString()}
                         <br />
@@ -27,18 +27,17 @@ export default class ErrorBoundary extends Component {
                 </div>
             )
         }
-
         return this.props.children;
     }
 }
 
-ErrorBoundary.propTypes = {
+ItemViewErrorBoundary.propTypes = {
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node,
     ])
 };
 
-ErrorBoundary.defaultProps = {
+ItemViewErrorBoundary.defaultProps = {
     children: []
 };

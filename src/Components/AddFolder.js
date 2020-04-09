@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NotefulContext from '../NotefulContext';
+import './AddFolder.css';
 
 export default class AddFolder extends Component {
     static contextType = NotefulContext;

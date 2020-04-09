@@ -1,0 +1,10 @@
+.submit-button {
+    outline: none;
+    border: none;
+    background-color: #FAF4BB;
+    margin-left: 10px;
+}
+
+.react-form {
+    padding: 10px 10px 10px 10px;
+}

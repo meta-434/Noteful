@@ -3,3 +3,7 @@
     flex-direction: row;
     border-radius: 10px;
 }
+
+.notes-display > a > p{
+    color: darkgrey;
+}

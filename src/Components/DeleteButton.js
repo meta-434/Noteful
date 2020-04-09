@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import NotefulContext from '../NotefulContext';
+import PropTypes from 'prop-types';
 import './DeleteButton.css';
 
 export default class DeleteButton extends Component {
@@ -19,3 +20,15 @@ export default class DeleteButton extends Component {
         )
     }
 }
+
+DeleteButton.propTypes = {
+    note: PropTypes.shape({
+        id: PropTypes.string,
+    })
+};
+
+DeleteButton.defaultProps = {
+    note: {
+        id: undefined
+    }
+};

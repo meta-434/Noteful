@@ -1,4 +1,4 @@
-button {
+.delete-button {
     background-image: url(../img/delete.png);
     background-repeat: no-repeat;
     background-position: center center;

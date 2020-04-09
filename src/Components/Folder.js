@@ -33,7 +33,7 @@ export default class Folder extends Component {
                 </NotefulContext.Consumer>
             );
         } else {
-            return (<p>... loading ...</p>)
+            return (<p>...no notes found...</p>)
         }
     }
 };
