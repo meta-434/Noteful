@@ -1,3 +1,31 @@
 .App {
   text-align: center;
 }
+
+.App > nav, .app-content {
+  display: inline-flex;
+  width: 25%;
+  position: relative;
+}
+
+.App > nav {
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding-top: 10%;
+}
+
+.App > main {
+  position: absolute;
+  right: 0;
+}
+
+.app-content {
+  width: 75%;
+  flex-wrap: wrap;
+}
+
+body {
+  background-color: #E2D9FF;
+}

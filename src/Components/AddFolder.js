@@ -20,7 +20,6 @@ export default class AddFolder extends Component {
     };
 
     validateFolder = (name) => {
-        console.log('before, name', name);
         let validationMessages;
         let hasError = false;
 
@@ -36,7 +35,6 @@ export default class AddFolder extends Component {
             validationMessages = '';
         }
 
-        console.log('here, name', name);
         this.setState({
             nameValid: !hasError,
             validation: validationMessages,
@@ -44,7 +42,6 @@ export default class AddFolder extends Component {
     };
 
     formValid = (name) => {
-        console.log('formIsValid name', name);
         if (this.state.nameValid) {
             this.setState({folderName: name})
         }

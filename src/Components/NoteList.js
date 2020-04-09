@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import NotefulContext from '../NotefulContext';
 import DeleteButton from './DeleteButton';
+import ReactRouterPropTypes from 'react-router-prop-types';
 
-export default class Main extends Component {
+export default class NoteList extends Component {
     static contextType = NotefulContext;
 
     render() {
-        console.log('here', this.props);
         return (
             <NotefulContext.Consumer>
                 {({ notes }) => {
@@ -26,4 +26,12 @@ export default class Main extends Component {
             </NotefulContext.Consumer>
         );
     }
-}
+};
+
+NoteList.propTypes = {
+    match: ReactRouterPropTypes.match.isRequired,
+};
+
+NoteList.defaultProps = {
+    match: "",
+};

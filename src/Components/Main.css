@@ -1,5 +1,5 @@
 .notes-display {
     display: flex;
-    flex-direction: column;
-    border: solid 3px blue;
+    flex-direction: row;
+    border-radius: 10px;
 }

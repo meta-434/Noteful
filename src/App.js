@@ -24,7 +24,8 @@ class App extends Component {
                 this.setState({
                     folders: responseJson
                 })
-            );
+            )
+            .catch(error => console.log(error));
 
         fetch('http://localhost:9090/notes')
             .then(response => response.json())
@@ -33,7 +34,7 @@ class App extends Component {
                     notes: responseJson
                 })
             )
-            .then(() => console.log(this.state));
+            .catch(error => console.log(error));
 
     };
 
@@ -67,7 +68,9 @@ class App extends Component {
             headers: {
                 'Content-Type': 'application/json'
             },
-        }).then(r => console.log('folder post confirmation', r))
+        })
+            .then(r => console.log('folder post confirmation', r))
+            .catch(error => console.log(error));
     };
 
     handlePostNote = ({ name, folderId, content }) => {
@@ -82,7 +85,9 @@ class App extends Component {
                 folderId,
                 content
             })
-        }).then(r => console.log('note post confirmation: ', r))
+        })
+            .then(r => console.log('note post confirmation: ', r))
+            .catch(error => console.log(error));
     };
 
     render() {

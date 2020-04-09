@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import DeleteButton from './DeleteButton';
 import NotefulContext from '../NotefulContext';
+import ReactRouterPropTypes from 'react-router-prop-types';
+
 import './Folder.css';
 
 export default class Folder extends Component {
@@ -34,4 +36,15 @@ export default class Folder extends Component {
             return (<p>... loading ...</p>)
         }
     }
-}
+};
+
+Folder.propTypes = {
+    match: ReactRouterPropTypes.match.isRequired,
+};
+
+Folder.defaultProps = {
+    match: "",
+};
+
+
+

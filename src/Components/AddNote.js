@@ -20,12 +20,12 @@ export default class AddNote extends Component {
 
     handleNoteName = (e) => {
         let nameInput = e.target.value;
-        this.setState({ name: nameInput }, (nameInput) => this.validateName(nameInput))
+        this.setState({ name: nameInput }, () => this.validateName(nameInput))
     };
 
     handleNoteContent = (e) => {
         let contentInput = e.target.value;
-        this.setState({ content: contentInput }, (contentInput) => this.validateContent(contentInput))
+        this.setState({ content: contentInput }, () => this.validateContent(contentInput))
     };
 
     handleFolderId = (e) => {
@@ -37,7 +37,7 @@ export default class AddNote extends Component {
         let validationMessages = this.state.nameValidation;
         let hasError = false;
 
-        if (name.length === 0) {
+        if (name && name.length === 0) {
             hasError = true;
             validationMessages = ' name cannot be blank. '
         }
@@ -49,14 +49,14 @@ export default class AddNote extends Component {
         this.setState({
             nameValid: !hasError,
             nameValidation: validationMessages,
-        }, (name) =>this.nameValid(name));
+        }, () =>this.nameValid(name));
     }
 
     validateContent(content) {
         let validationMessages = this.state.contentValidation;
         let hasError = false;
 
-        if (content.length === 0) {
+        if (content && content.length === 0) {
             hasError = true;
             validationMessages = ' Note cannot be blank. '
         }
@@ -68,7 +68,7 @@ export default class AddNote extends Component {
         this.setState({
             contentValid: !hasError,
             contentValidation: validationMessages,
-        }, (content) => this.contentValid(content));
+        }, () => this.contentValid(content));
     }
 
     nameValid(name) {

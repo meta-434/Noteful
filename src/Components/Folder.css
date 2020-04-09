@@ -1,6 +1,15 @@
 .notes-display {
-    background-color: green;
+    background-color: #FAF4BB;
     display: inline-flex;
     flex-basis: fit-content;
     margin: 0.5%;
+}
+
+.notes-display > a {
+    margin-left: 15px;
+
+}
+
+a {
+    text-decoration: none;
 }

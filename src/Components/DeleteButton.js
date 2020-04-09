@@ -13,7 +13,7 @@ export default class DeleteButton extends Component {
                     type="submit"
                     className="delete-button"
                     onClick={() => this.context.handleDeleteFetch(noteId)}>
-                    Delete
+                    <span>Delete</span>
                 </button>
             </Link>
         )

@@ -1,0 +1,22 @@
+button {
+    background-image: url(../img/delete.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    /* put the height and width of your image here */
+    border: none;
+    height: 25px;
+    outline: none;
+    background-color: Transparent;
+    padding-right: 10px;
+    margin-right: 5px;
+}
+
+button:hover {
+    background-color: #B3AC69;
+    border-radius: 2px;
+}
+
+button span {
+    display: none;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import NotefulContext from '../NotefulContext';
+import './Nav.css';
 
 export default class Nav extends Component {
     render() {
@@ -24,7 +25,7 @@ export default class Nav extends Component {
                                         <NavLink to={`/folders/${folder.id}`}
                                                  key={index}
                                                  style={{textDecoration: 'none'}}>
-                                            <div>{folder.name}</div>
+                                            <p>{folder.name}</p>
                                         </NavLink>
                                     )
                                 })}

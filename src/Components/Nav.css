@@ -1,0 +1,34 @@
+.navigation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    max-width: 15%;
+    padding: 10px;
+    height: 100%;
+    background-color: #8071AD;
+}
+
+.add-content {
+    justify-content: center;
+    align-content: center;
+    display: flex;
+}
+
+.add-content > a {
+    padding: 10px;
+    margin: 0 5px 0 5px;
+    border-radius: 10px;
+    background: #FAF4BB;
+}
+
+.folder-list {
+    max-width: content-box;
+}
+
+.folder-list > a > p {
+    margin: 5px 0 5px 0;
+    padding: 5px;
+    border-radius: 10px;
+    background: #FAF4BB;
+}
