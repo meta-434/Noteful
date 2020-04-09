@@ -25,9 +25,9 @@
   position: fixed;
   left: 200px;
   display: inline-flex;
-  width: 100%;
+  max-width: calc(100% - 200px);
   flex-wrap: wrap;
-  margin-left: 2%;
+  justify-content: center;
 }
 
 .iNote {

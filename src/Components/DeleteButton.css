@@ -12,6 +12,10 @@
     margin-right: 5px;
 }
 
+.delete-button:focus {
+    outline: 2px darkgrey solid;
+}
+
 button:hover {
     background-color: #B3AC69;
     border-radius: 2px;

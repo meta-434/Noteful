@@ -19,8 +19,16 @@
     background: #FAF4BB;
 }
 
+.add-content > a:focus {
+    outline: 2px lightgray solid;
+}
+
 .folder-list {
     max-width: content-box;
+}
+
+.folder-list > a:focus {
+    outline: 2px lightgray solid;
 }
 
 .folder-list > a > p {
