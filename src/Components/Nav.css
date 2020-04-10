@@ -16,7 +16,7 @@
     padding: 10px;
     margin: 0 5px 0 5px;
     border-radius: 10px;
-    border: 2px solid #554B73;
+    border: 2px solid #443857;
 }
 
 .add-content > a:focus {
@@ -35,5 +35,5 @@
     margin: 5px 0 5px 0;
     padding: 5px;
     border-radius: 10px;
-    border: 2px solid #554B73;
+    border: 2px solid #443857;
 }

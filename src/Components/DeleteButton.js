@@ -11,7 +11,8 @@ export default class DeleteButton extends Component {
         return(
             <Link to="/">
                 <button
-                    type="submit"
+                    type="image"
+                    aria-label="delete button"
                     className="delete-button"
                     onClick={() => this.context.handleDeleteFetch(noteId)}>
                     <span>Delete</span>
