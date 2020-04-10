@@ -4,17 +4,20 @@ import NotefulContext from '../NotefulContext';
 export default class AddNote extends Component {
     static contextType = NotefulContext;
 
-    state = {
-        name: undefined,
-        folderId: undefined,
-        content: undefined,
-        nameValid: false,
-        contentValid: false,
-        folderIdValid: false,
-        nameValidation: '',
-        contentValidation: '',
-        folderIdValidation: '',
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: undefined,
+            folderId: undefined,
+            content: undefined,
+            nameValid: false,
+            contentValid: false,
+            folderIdValid: false,
+            nameValidation: '',
+            contentValidation: '',
+            folderIdValidation: '',
+        };
+    }
 
     componentDidMount() {
         this.validateFolderId(this.state.folderId);
@@ -129,7 +132,7 @@ export default class AddNote extends Component {
                 <form
                     className="react-form"
                     onSubmit={this.handlePostSubmit}>
-                    <label htmlFor="note-name">name: </label>
+                    <label htmlFor="note-name">note name: </label>
                     <input
                         type="text"
                         id="note-name"
@@ -137,14 +140,21 @@ export default class AddNote extends Component {
                         className="note-name"
                         onChange={this.handleNoteName}
                         defaultValue={'enter note name'}
+                        aria-label="note name"
+                        aria-required="true"
+                        aria-describedby="error-box"
                     />
-                    <label htmlFor="note-content">Content: </label>
+                    <label htmlFor="note-content">note content: </label>
                     <textarea
+                        type="text"
                         id="note-content"
                         name="note-content"
                         className="note-content"
                         onChange={this.handleNoteContent}
                         defaultValue={'enter note content'}
+                        aria-label="note content"
+                        aria-required="true"
+                        aria-describedby="error-box"
                     />
                     <label htmlFor="note-folder">Folder: </label>
                     <select

@@ -5,11 +5,17 @@ import './AddFolder.css';
 export default class AddFolder extends Component {
     static contextType = NotefulContext;
 
-    state = {
-        folderName: undefined,
-        nameValid: false,
-        validation: ''
-    };
+    constructor() {
+        super();
+        this.state = {
+            folderName: undefined,
+            nameValid: false,
+            validation: ''
+        };
+
+        this.folderName = React.createRef();
+    }
+
 
     componentDidMount() {
         this.validateFolder(this.state.folderName);
@@ -48,7 +54,11 @@ export default class AddFolder extends Component {
 
     formValid = (name) => {
         if (this.state.nameValid) {
-            this.setState({folderName: name})
+            this.setState({folderName: name}, () => {
+                if (!this.state.nameValid) {
+                    this.folderName.current.focus();
+                }
+            } )
         }
     };
 
@@ -65,7 +75,12 @@ export default class AddFolder extends Component {
                         name="folder-name"
                         className="folder-name"
                         defaultValue="Folder Name"
-                        onChange={ this.handleFolderName} />
+                        onChange={ this.handleFolderName}
+                        aria-label="new folder name"
+                        aria-required="true"
+                        aria-describedby="error-box"
+                        aria-invalid={!this.state.nameValid}
+                    />
                     <button
                         className="submit-button"
                         type="submit"
