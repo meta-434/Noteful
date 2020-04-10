@@ -6,10 +6,14 @@ export default class AddFolder extends Component {
     static contextType = NotefulContext;
 
     state = {
-        folderName: '',
+        folderName: undefined,
         nameValid: false,
         validation: ''
     };
+
+    componentDidMount() {
+        this.validateFolder(this.state.folderName);
+    }
 
     handlePostSubmit = () => {
         this.context.handlePostFolder(this.state.folderName);
@@ -26,7 +30,7 @@ export default class AddFolder extends Component {
 
         const checkExistingFolders = this.context.folders.filter(folderName => name === folderName.name);
 
-        if (name && name.length === 0) {
+        if (!name) {
             hasError = true;
             validationMessages = 'Please enter a folder name.';
         } else if (checkExistingFolders.length !== 0) {

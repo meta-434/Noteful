@@ -5,14 +5,22 @@ export default class AddNote extends Component {
     static contextType = NotefulContext;
 
     state = {
-        name: '',
-        folderId: '',
-        content: '',
+        name: undefined,
+        folderId: undefined,
+        content: undefined,
         nameValid: false,
         contentValid: false,
+        folderIdValid: false,
         nameValidation: '',
-        contentValidation: ''
+        contentValidation: '',
+        folderIdValidation: '',
     };
+
+    componentDidMount() {
+        this.validateFolderId(this.state.folderId);
+        this.validateName(this.state.name);
+        this.validateContent(this.state.content);
+    }
 
     handlePostSubmit = () => {
         this.context.handlePostNote(this.state);
@@ -30,18 +38,36 @@ export default class AddNote extends Component {
 
     handleFolderId = (e) => {
         let folderId = e.target.value;
-        this.setState({ folderId })
+        console.log('folderId', folderId)
+        this.setState({ folderId }, () => this.validateFolderId(folderId))
+    };
+
+    validateFolderId(folderId) {
+        let validationMessages;
+        let hasError = false;
+
+        if (folderId === '0' || folderId === undefined) {
+            hasError = true;
+            validationMessages = ' please select a folder ';
+        }
+        else {
+            validationMessages = '';
+        }
+
+        this.setState({
+            folderIdValid: !hasError,
+            folderIdValidation: validationMessages
+        }, () => this.folderIdValid(folderId));
     };
 
     validateName(name) {
-        let validationMessages = this.state.nameValidation;
+        let validationMessages;
         let hasError = false;
 
-        if (name && name.length === 0) {
+        if (!name) {
             hasError = true;
             validationMessages = ' name cannot be blank. '
         }
-
         else {
             validationMessages = '';
         }
@@ -50,13 +76,13 @@ export default class AddNote extends Component {
             nameValid: !hasError,
             nameValidation: validationMessages,
         }, () =>this.nameValid(name));
-    }
+    };
 
     validateContent(content) {
-        let validationMessages = this.state.contentValidation;
+        let validationMessages;
         let hasError = false;
 
-        if (content && content.length === 0) {
+        if (!content) {
             hasError = true;
             validationMessages = ' Note cannot be blank. '
         }
@@ -69,19 +95,25 @@ export default class AddNote extends Component {
             contentValid: !hasError,
             contentValidation: validationMessages,
         }, () => this.contentValid(content));
-    }
+    };
 
     nameValid(name) {
         if (this.state.name) {
             this.setState({name: name})
         }
-    }
+    };
 
     contentValid(content) {
         if (this.state.content) {
             this.setState({content})
         }
-    }
+    };
+
+    folderIdValid(folderId) {
+        if (this.state.folderId) {
+            this.setState({folderId})
+        }
+    };
 
     render() {
         let folderList = this.context.folders.map(folder => {
@@ -103,13 +135,17 @@ export default class AddNote extends Component {
                         id="note-name"
                         name="note-name"
                         className="note-name"
-                        onChange={this.handleNoteName} />
+                        onChange={this.handleNoteName}
+                        defaultValue={'enter note name'}
+                    />
                     <label htmlFor="note-content">Content: </label>
                     <textarea
                         id="note-content"
                         name="note-content"
                         className="note-content"
-                        onChange={this.handleNoteContent} />
+                        onChange={this.handleNoteContent}
+                        defaultValue={'enter note content'}
+                    />
                     <label htmlFor="note-folder">Folder: </label>
                     <select
                         id="note-folder"
@@ -126,12 +162,15 @@ export default class AddNote extends Component {
                     <button
                         className="submit-button"
                         type="submit"
-                        disabled={!this.state.nameValid || !this.state.contentValid}>
+                        disabled={!this.state.nameValid || !this.state.contentValid || !this.state.folderIdValid}>
                         Submit
                     </button>
                     <section className="error-box" id="error-box" aria-live="assertive">
                         {this.state.nameValidation}
+                        <br />
                         {this.state.contentValidation}
+                        <br />
+                        {this.state.folderIdValidation}
                     </section>
                 </form>
             </main>
