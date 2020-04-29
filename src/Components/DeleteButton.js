@@ -8,6 +8,7 @@ export default class DeleteButton extends Component {
     static contextType = NotefulContext;
     render() {
         let noteId = this.props.note.id;
+        console.log(noteId);
         return(
             <Link to="/">
                 <button

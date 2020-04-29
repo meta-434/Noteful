@@ -15,9 +15,9 @@ export default class NoteList extends Component {
                     return iNote.map(iNote => {
                         return(
                             <div className="iNote" key={iNote.id}>
-                                <h3>{iNote.name}</h3>
-                                <p>{iNote.content}</p>
-                                <p>Modified: {iNote.modified}</p>
+                                <h3>{iNote.note_name}</h3>
+                                <p>{iNote.note_content}</p>
+                                <p>Modified: {iNote.date_modified}</p>
                                 <DeleteButton note={iNote} />
                             </div>
                         )

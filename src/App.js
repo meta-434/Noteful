@@ -20,7 +20,11 @@ class App extends Component {
     };
 
     componentDidMount() {
-        fetch('http://localhost:9090/folders')
+        this.handleGetFetch();
+    };
+
+    handleGetFetch = () => {
+        fetch('http://localhost:8000/folders')
             .then(response => response.json())
             .then(responseJson =>
                 this.setState({
@@ -29,7 +33,7 @@ class App extends Component {
             )
             .catch(error => console.error(error));
 
-        fetch('http://localhost:9090/notes')
+        fetch('http://localhost:8000/notes')
             .then(response => response.json())
             .then(responseJson =>
                 this.setState({
@@ -37,21 +41,26 @@ class App extends Component {
                 })
             )
             .catch(error => console.error(error));
-
-    };
+    }
 
     handleDeleteFetch = (noteId) => {
-        fetch(`http://localhost:9090/notes/${noteId}`, {
+        fetch(`http://localhost:8000/notes/${noteId}`, {
             method: 'DELETE'
         })
             .then(response => {
                 if (response.ok) {
+                    const newNotes = this.state.notes.filter(note => note.id !== noteId);
+                    this.setState({
+                        notes: newNotes
+                    });
+                    this.props.history.push('/');
                     return response.json();
                 } else {
                     throw new Error(response.statusText);
                 }
             })
             .then(() => this.handleDelete(noteId))
+
             .catch(error => console.error(error))
     };
 
@@ -62,10 +71,10 @@ class App extends Component {
     };
 
     handlePostFolder = (folderName) => {
-        fetch('http://localhost:9090/folders', {
+        fetch('http://localhost:8000/folders', {
             method: 'POST',
             body: JSON.stringify({
-                name: folderName
+                folder_name: folderName
             }),
             headers: {
                 'Content-Type': 'application/json'
@@ -76,16 +85,16 @@ class App extends Component {
     };
 
     handlePostNote = ({ name, folderId, content }) => {
-        fetch(`http://localhost:9090/notes`, {
+        fetch(`http://localhost:8000/notes`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                modified: new Date(),
-                name,
-                folderId,
-                content
+                date_modified: new Date(),
+                note_name: name,
+                assigned_folder: folderId,
+                note_content: content
             })
         })
             .then(r => console.log('note post confirmation: ', r))
@@ -102,6 +111,7 @@ class App extends Component {
             handlePostFolder: this.handlePostFolder,
             handlePostNote: this.handlePostNote
         };
+        console.log('app render state', this.state);
         return (
             <NotefulContext.Provider value={(context)}>
                 <div className="App">

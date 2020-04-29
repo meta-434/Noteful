@@ -10,13 +10,16 @@ export default class Main extends Component {
     render() {
         return (
             <NotefulContext.Consumer>
-                {({ notes }) => {
+                {({ notes, folders }) => {
                     return notes.map((note, index) => {
+                        const filteredFolder = folders.filter(folder => folder.id === note.assigned_folder)[0];
+                        console.log('matchedfolders', filteredFolder);
                         return (
                             <section className="notes-display" key={index}>
                                 <Link to={`/notes/${note.id}`}>
-                                    <h3>{note.name}</h3>
-                                    <p>{note.modified}</p>
+                                    <h2>{note.note_name}</h2>
+                                    <h3>↳ {filteredFolder.folder_name}</h3>
+                                    <p>{note.date_modified}</p>
                                 </Link>
                                 <DeleteButton note={note} />
                             </section>

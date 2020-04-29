@@ -120,7 +120,7 @@ export default class AddNote extends Component {
 
     render() {
         let folderList = this.context.folders.map(folder => {
-            return folder.name
+            return folder.folder_name
         });
 
         let folderIds = this.context.folders.map(folder => {

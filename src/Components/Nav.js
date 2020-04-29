@@ -8,6 +8,7 @@ export default class Nav extends Component {
         return (
             <NotefulContext.Consumer>
                 {({ folders }) => {
+                    console.log('nav\'s folders', folders);
                     return (
                         <nav className="navigation">
                             <section className="add-content">
@@ -25,7 +26,7 @@ export default class Nav extends Component {
                                         <NavLink to={`/folders/${folder.id}`}
                                                  key={index}
                                                  style={{textDecoration: 'none'}}>
-                                            <p>{folder.name}</p>
+                                            <p>{folder.folder_name}</p>
                                         </NavLink>
                                     )
                                 })}

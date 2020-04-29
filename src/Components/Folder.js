@@ -15,15 +15,15 @@ export default class Folder extends Component {
             return (
                 <NotefulContext.Consumer>
                     {({ notes }) => {
-                        // console.log('notes', notes, 'props', this.props);
-                        const filteredNotes = notes.filter(note => note.folderId === this.props.match.params.folder_id);
+                        console.log('folder\'s notes', notes);
+                        const filteredNotes = notes.filter(note => note.assigned_folder === this.props.match.params.folder_id);
                         return filteredNotes
                             .map(fNote => {
                                 return (
                                     <section className="notes-display" key={fNote.id}>
                                         <Link to={`/notes/${fNote.id}`} style={{textDecoration: 'none'}}>
-                                            <h3>{fNote.name}</h3>
-                                            <p>{fNote.modified}</p>
+                                            <h3>{fNote.note_name}</h3>
+                                            <p>{fNote.date_modified}</p>
                                         </Link>
                                         <DeleteButton note={fNote} />
                                     </section>

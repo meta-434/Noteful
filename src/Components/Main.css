@@ -7,3 +7,8 @@
 .notes-display > a > p {
     color: black;
 }
+
+.notes-display > a > h3 {
+    font-size: small;
+    text-align: left;
+}
