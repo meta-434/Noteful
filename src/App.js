@@ -20,6 +20,7 @@ class App extends Component {
     };
 
     componentDidMount() {
+        console.log("welcome...");
         this.handleGetFetch();
     };
 
