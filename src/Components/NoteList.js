@@ -11,7 +11,6 @@ export default class NoteList extends Component {
             <NotefulContext.Consumer>
                 {({ notes }) => {
                     const iNote = notes.filter(iNote => iNote.id === this.props.match.params.note_id);
-                    console.log('iNote: ', iNote);
                     return iNote.map(iNote => {
                         return(
                             <div className="iNote" key={iNote.id}>

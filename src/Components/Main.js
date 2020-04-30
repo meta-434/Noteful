@@ -13,7 +13,6 @@ export default class Main extends Component {
                 {({ notes, folders }) => {
                     return notes.map((note, index) => {
                         const filteredFolder = folders.filter(folder => folder.id === note.assigned_folder)[0];
-                        console.log('matchedfolders', filteredFolder);
                         return (
                             <section className="notes-display" key={index}>
                                 <Link to={`/notes/${note.id}`}>

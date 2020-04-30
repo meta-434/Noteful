@@ -8,7 +8,6 @@ export default class Nav extends Component {
         return (
             <NotefulContext.Consumer>
                 {({ folders }) => {
-                    console.log('nav\'s folders', folders);
                     return (
                         <nav className="navigation">
                             <section className="add-content">

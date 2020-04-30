@@ -15,7 +15,6 @@ export default class Folder extends Component {
             return (
                 <NotefulContext.Consumer>
                     {({ notes }) => {
-                        console.log('folder\'s notes', notes);
                         const filteredNotes = notes.filter(note => note.assigned_folder === this.props.match.params.folder_id);
                         return filteredNotes
                             .map(fNote => {

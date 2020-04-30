@@ -80,7 +80,6 @@ class App extends Component {
                 'Content-Type': 'application/json'
             },
         })
-            .then(r => console.log('folder post confirmation', r))
             .catch(error => console.error(error));
     };
 
@@ -97,7 +96,6 @@ class App extends Component {
                 note_content: content
             })
         })
-            .then(r => console.log('note post confirmation: ', r))
             .catch(error => console.error(error));
     };
 
@@ -111,7 +109,6 @@ class App extends Component {
             handlePostFolder: this.handlePostFolder,
             handlePostNote: this.handlePostNote
         };
-        console.log('app render state', this.state);
         return (
             <NotefulContext.Provider value={(context)}>
                 <div className="App">

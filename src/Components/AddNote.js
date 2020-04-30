@@ -41,7 +41,6 @@ export default class AddNote extends Component {
 
     handleFolderId = (e) => {
         let folderId = e.target.value;
-        console.log('folderId', folderId)
         this.setState({ folderId }, () => this.validateFolderId(folderId))
     };
 
