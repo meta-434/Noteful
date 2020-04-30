@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../noteful-server/.idea/express-boilerplate.iml" filepath="$PROJECT_DIR$/../noteful-server/.idea/express-boilerplate.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/noteful.iml" filepath="$PROJECT_DIR$/.idea/noteful.iml" />
     </modules>
   </component>

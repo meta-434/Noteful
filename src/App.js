@@ -24,7 +24,7 @@ class App extends Component {
     };
 
     handleGetFetch = () => {
-        fetch('http://localhost:8000/folders')
+        fetch('process.env.SERVER_URL/folders')
             .then(response => response.json())
             .then(responseJson =>
                 this.setState({
@@ -33,7 +33,7 @@ class App extends Component {
             )
             .catch(error => console.error(error));
 
-        fetch('http://localhost:8000/notes')
+        fetch('process.env.SERVER_URL/notes')
             .then(response => response.json())
             .then(responseJson =>
                 this.setState({
@@ -44,7 +44,7 @@ class App extends Component {
     }
 
     handleDeleteFetch = (noteId) => {
-        fetch(`http://localhost:8000/notes/${noteId}`, {
+        fetch(`process.env.SERVER_URL/notes/${noteId}`, {
             method: 'DELETE'
         })
             .then(response => {
@@ -71,7 +71,7 @@ class App extends Component {
     };
 
     handlePostFolder = (folderName) => {
-        fetch('http://localhost:8000/folders', {
+        fetch('process.env.SERVER_URL/folders', {
             method: 'POST',
             body: JSON.stringify({
                 folder_name: folderName
@@ -84,7 +84,7 @@ class App extends Component {
     };
 
     handlePostNote = ({ name, folderId, content }) => {
-        fetch(`http://localhost:8000/notes`, {
+        fetch(`process.env.SERVER_URL/notes`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
