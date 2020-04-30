@@ -20,12 +20,11 @@ class App extends Component {
     };
 
     componentDidMount() {
-        console.log("welcome...");
         this.handleGetFetch();
     };
 
     handleGetFetch = () => {
-        fetch('process.env.SERVER_URL/folders')
+        fetch(process.env.SERVER_URL + `/folders`)
             .then(response => response.json())
             .then(responseJson =>
                 this.setState({
@@ -34,7 +33,7 @@ class App extends Component {
             )
             .catch(error => console.error(error));
 
-        fetch('process.env.SERVER_URL/notes')
+        fetch(process.env.SERVER_URL+ `/notes`)
             .then(response => response.json())
             .then(responseJson =>
                 this.setState({
@@ -45,7 +44,7 @@ class App extends Component {
     }
 
     handleDeleteFetch = (noteId) => {
-        fetch(`process.env.SERVER_URL/notes/${noteId}`, {
+        fetch(process.env.SERVER_URL+ `/notes/${noteId}`, {
             method: 'DELETE'
         })
             .then(response => {
@@ -72,7 +71,7 @@ class App extends Component {
     };
 
     handlePostFolder = (folderName) => {
-        fetch('process.env.SERVER_URL/folders', {
+        fetch(process.env.SERVER_URL+ `/folders`, {
             method: 'POST',
             body: JSON.stringify({
                 folder_name: folderName
@@ -85,7 +84,7 @@ class App extends Component {
     };
 
     handlePostNote = ({ name, folderId, content }) => {
-        fetch(`process.env.SERVER_URL/notes`, {
+        fetch(process.env.SERVER_URL + `/notes`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
