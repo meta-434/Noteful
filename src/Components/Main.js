@@ -13,11 +13,17 @@ export default class Main extends Component {
                 {({ notes, folders }) => {
                     return notes.map((note, index) => {
                         const filteredFolder = folders.filter(folder => folder.id === note.assigned_folder)[0];
+                        console.log('filteredFolder', filteredFolder);
                         return (
                             <section className="notes-display" key={index}>
                                 <Link to={`/notes/${note.id}`}>
                                     <h2>{note.note_name}</h2>
-                                    <h3>↳ {filteredFolder.folder_name}</h3>
+                                    <h3>↳ {
+                                        (filteredFolder)
+                                        ? (filteredFolder.folder_name)
+                                        :(`Loading...`)
+                                        }
+                                    </h3>
                                     <p>{note.date_modified}</p>
                                 </Link>
                                 <DeleteButton note={note} />
